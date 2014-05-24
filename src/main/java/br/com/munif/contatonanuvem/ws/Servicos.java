@@ -41,9 +41,9 @@ public class Servicos {
     @GET
     @Path("/insere/{param}")
     public Response insere(@PathParam("param")String contatoJson){
+        System.out.println("Inserindo "+contatoJson);
         Gson gson = new Gson();
         ContatoAndroid ca = gson.fromJson(contatoJson, ContatoAndroid.class);
-        
         Usuario u=Negociao.recuperaUsuario(ca.getPin());
         if (u==null) {
             return Response.status(400).entity("Pin invalido").build();
