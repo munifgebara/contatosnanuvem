@@ -6,11 +6,13 @@
 package br.com.munif.contatonanuvem;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -26,8 +28,30 @@ public class Contato implements Serializable {
 
     private String nome;
 
+    @OneToMany(mappedBy = "contato")
+    private List<Email> emails;
+
+    @OneToMany(mappedBy = "contato")
+    private List<Telefone> telefones;
+
     @ManyToOne
     private Usuario usuario;
+
+    public List<Email> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(List<Email> emails) {
+        this.emails = emails;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
 
     public Long getId() {
         return id;
