@@ -60,6 +60,7 @@ public class TransaFiltro implements Filter {
             }
             t.printStackTrace();
         }
+        em.close();
     }
 
     @Override
@@ -68,6 +69,7 @@ public class TransaFiltro implements Filter {
 
     @Override
     public void destroy() {
+        emf.close();
     }
 
 }
