@@ -19,6 +19,13 @@ import javax.persistence.Query;
  */
 public class Negociao {
 
+    public static List<Usuario> listaUsuarios() {
+        EntityManager em = TransaFiltro.tlem.get();
+        Query q = em.createQuery("from Usuario u order by u.email");
+        return q.getResultList();
+    }
+
+    
     public static List<Contato> listaContatos(String pin) {
         EntityManager em = TransaFiltro.tlem.get();
         Query q = em.createQuery("from Contato c where c.usuario.pin=:p order by c.nome");

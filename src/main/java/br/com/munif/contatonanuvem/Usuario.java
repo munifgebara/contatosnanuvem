@@ -85,7 +85,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.munif.contatonanuvem.Usuario[ id=" + id + " ]";
+        return email+" "+pin;
     }
 
 }
