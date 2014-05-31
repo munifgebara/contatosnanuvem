@@ -75,7 +75,7 @@ public class Telefone implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.munif.contatonanuvem.Telefone[ id=" + id + " ]";
+        return numero;
     }
 
 }

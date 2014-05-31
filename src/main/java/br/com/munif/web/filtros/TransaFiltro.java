@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.security.Principal;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -19,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -28,6 +30,7 @@ import javax.servlet.annotation.WebFilter;
 public class TransaFiltro implements Filter {
 
     public static final ThreadLocal<EntityManager> tlem = new ThreadLocal<EntityManager>();
+    public static final ThreadLocal<String> tlus = new ThreadLocal<String>();
 
     private EntityManagerFactory emf;
 
@@ -41,6 +44,20 @@ public class TransaFiltro implements Filter {
             throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+
+        Principal userPrincipal = ((HttpServletRequest) request).getUserPrincipal();
+
+        String us = userPrincipal != null ? userPrincipal.getName() : "nao logado";
+        /*
+         String us;
+         if (userPrincipal!=null){
+         us=userPrincipal.getName();
+         }
+         else{
+         us="nao logado";
+         }
+         */
+        tlus.set(us);
 
         EntityManager em = emf.createEntityManager();
         tlem.set(em);

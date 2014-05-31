@@ -75,7 +75,7 @@ public class Email implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.munif.contatonanuvem.Email[ id=" + id + " ]";
+        return endereco;
     }
 
 }

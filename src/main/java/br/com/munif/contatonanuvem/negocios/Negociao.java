@@ -84,5 +84,10 @@ public class Negociao {
         } while (u!=null);
         return ""+numero;
     }
+    
+    
+    public static String emailLogado(){
+        return TransaFiltro.tlus.get();
+    }
 
 }

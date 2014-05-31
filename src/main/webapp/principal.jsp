@@ -4,6 +4,7 @@
     Author     : munifgebarajunior
 --%>
 
+<%@page import="br.com.munif.contatonanuvem.negocios.Negociao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,6 +14,9 @@
     </head>
     <body>
         <h1>Contato Na Nuvem</h1>
+        <%=Negociao.emailLogado()%><br/>
+        
+        
 
 
         <p>Bem Vindo ao Contato na Nuvem, uma aplicação do pessoal da pós de Paranavaí.</p>
@@ -24,7 +28,7 @@
             Email:<input type="text" name="email" value="" />
             <input type="submit" value="Enviar" />
         </form>
-        <h2><a href="cliente">Acesse a seus contatos</a>  </h2>
+        <h2><a href="faces/cliente/contatos.xhtml">Acesse a seus contatos</a>  </h2>
         
     </body>
 </html>
