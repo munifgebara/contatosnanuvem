@@ -6,6 +6,7 @@
 package br.com.munif.contatonanuvem;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,9 +26,20 @@ public class Usuario implements Serializable {
 
     private String email;
 
+    @Column(unique = true)
     private String pin;
 
-    public Long getId() {
+    private String nivel;
+
+    public String getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(String nivel) {
+        this.nivel = nivel;
+    }
+
+    Long getId() {
         return id;
     }
 

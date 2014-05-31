@@ -44,7 +44,7 @@ public class Servicos {
         System.out.println("Inserindo "+contatoJson);
         Gson gson = new Gson();
         ContatoAndroid ca = gson.fromJson(contatoJson, ContatoAndroid.class);
-        Usuario u=Negociao.recuperaUsuario(ca.getPin());
+        Usuario u=Negociao.recuperaUsuarioPorPin(ca.getPin());
         if (u==null) {
             return Response.status(400).entity("Pin invalido").build();
         }
