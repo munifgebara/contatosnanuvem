@@ -9,17 +9,13 @@
     <h:body>
         <h:form>
             Olá #{clienteControlador.usuario}
-            <p:dataTable var="contato" value="#{clienteControlador.contatos}">
-                <p:column headerText="Nome">
-                    <h:outputText value="#{contato.nome}" />
-                </p:column>
-                <p:column headerText="Telefones">
-                    <h:outputText value="#{contato.telefones}" />
-                </p:column>
-                <p:column headerText="Emails">
-                    <h:outputText value="#{contato.emails}" />
-                </p:column>
-            </p:dataTable>
+
+            <p:tree value="#{clienteControlador.raizContatos}" var="no" orientation="horizontal">
+                <p:treeNode>
+                    <h:outputText value="#{no}" />
+                </p:treeNode>
+            </p:tree>
+
         </h:form>
     </h:body>
 </html>
