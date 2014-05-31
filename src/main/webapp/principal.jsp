@@ -24,5 +24,7 @@
             Email:<input type="text" name="email" value="" />
             <input type="submit" value="Enviar" />
         </form>
+        <h2><a href="cliente">Acesse a seus contatos</a>  </h2>
+        
     </body>
 </html>

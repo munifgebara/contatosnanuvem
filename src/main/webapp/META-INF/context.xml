@@ -1,2 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/contatonanuvem"/>
+<Context antiJARLocking="true" path="/contatonanuvem">
+    
+        <Realm className="org.apache.catalina.realm.JDBCRealm"
+           driverName="com.mysql.jdbc.Driver"
+           connectionURL="jdbc:mysql://127.0.0.1/contatosnanuvem"
+           connectionName="root" 
+           connectionPassword="senha"
+               
+           userTable="Usuario"
+           userNameCol="email"
+           userCredCol="pin"
+           
+           userRoleTable="Usuario"
+           roleNameCol="nivel"
+         />
+    
+    
+    
+</Context>
