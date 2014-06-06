@@ -13,11 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import org.hibernate.envers.Audited;
 
 /**
  *
  * @author munifgebarajunior
  */
+@Audited
 @Entity
 public class Contato implements Serializable {
 

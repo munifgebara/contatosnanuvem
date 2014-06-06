@@ -11,11 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import org.hibernate.envers.Audited;
 
 /**
  *
  * @author munifgebarajunior
  */
+@Audited
 @Entity
 public class Email implements Serializable {
 

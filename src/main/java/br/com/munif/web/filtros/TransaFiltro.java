@@ -5,6 +5,7 @@
  */
 package br.com.munif.web.filtros;
 
+import br.com.munif.contatonanuvem.DadosAuditoria;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -31,6 +32,8 @@ public class TransaFiltro implements Filter {
 
     public static final ThreadLocal<EntityManager> tlem = new ThreadLocal<EntityManager>();
     public static final ThreadLocal<String> tlus = new ThreadLocal<String>();
+    public static final ThreadLocal<DadosAuditoria> tlda=new ThreadLocal<DadosAuditoria>();
+    
 
     private EntityManagerFactory emf;
 
@@ -58,6 +61,11 @@ public class TransaFiltro implements Filter {
          }
          */
         tlus.set(us);
+        
+        DadosAuditoria da=new DadosAuditoria();
+        da.setIp(request.getRemoteAddr());
+        da.setUsuario(us);
+        tlda.set(da);
 
         EntityManager em = emf.createEntityManager();
         tlem.set(em);
