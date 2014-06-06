@@ -41,6 +41,9 @@ public class ControladorPrincipal extends HttpServlet {
                 proximaPagina = "cadastrado.jsp";
 
             }
+            if ("logout".equals(ac)){
+                request.getSession().invalidate();
+            }
             request.getRequestDispatcher(proximaPagina).forward(request, response);
         } catch (Exception ex) {
             request.setAttribute("mensagem", ex.getMessage());

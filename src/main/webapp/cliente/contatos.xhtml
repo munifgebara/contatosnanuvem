@@ -9,6 +9,8 @@
     <h:body>
         <h:form>
             Olá #{clienteControlador.usuario}
+            
+            <a href="../../controlador?acao=logout">Logout</a><br/>
 
             <p:tree value="#{clienteControlador.raizContatos}" var="no" orientation="horizontal">
                 <p:treeNode>

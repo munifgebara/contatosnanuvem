@@ -11,6 +11,7 @@ import br.com.munif.contatonanuvem.Email;
 import br.com.munif.contatonanuvem.Telefone;
 import br.com.munif.contatonanuvem.Usuario;
 import br.com.munif.contatonanuvem.negocios.Negociao;
+import br.com.munif.web.filtros.TransaFiltro;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class Servicos {
         Gson gson = new Gson();
         ContatoAndroid ca = gson.fromJson(contatoJson, ContatoAndroid.class);
         Usuario u=Negociao.recuperaUsuarioPorPin(ca.getPin());
+        TransaFiltro.tlda.get().setUsuario(u.getEmail());
         if (u==null) {
             return Response.status(400).entity("Pin invalido").build();
         }
