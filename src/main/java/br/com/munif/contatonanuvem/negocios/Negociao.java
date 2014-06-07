@@ -27,7 +27,6 @@ public class Negociao {
         return q.getResultList();
     }
 
-    
     public static List<Contato> listaContatos(String pin) {
         EntityManager em = TransaFiltro.tlem.get();
         Query q = em.createQuery("from Contato c where c.usuario.pin=:p order by c.nome");
@@ -72,30 +71,28 @@ public class Negociao {
         }
         String pin = geraPin();
         //TRABALHO OU TAREFA ENVIAR EMAIL PARA O CARA COM PIN
-        Usuario u=new Usuario();
+        Usuario u = new Usuario();
         u.setEmail(email);
         u.setPin(pin);
         u.setNivel("cliente");
         EntityManager em = TransaFiltro.tlem.get();
         em.persist(u);
-        
-        
+
         return pin;
     }
 
     private static String geraPin() {
         Random random = new Random();
-        long numero=0l;
-        Usuario u=null;
+        long numero = 0l;
+        Usuario u = null;
         do {
             numero = 999999 - random.nextInt(900000);
             u = recuperaUsuarioPorPin("" + numero);
-        } while (u!=null);
-        return ""+numero;
+        } while (u != null);
+        return "" + numero;
     }
-    
-    
-    public static String emailLogado(){
+
+    public static String emailLogado() {
         return TransaFiltro.tlus.get();
     }
 
@@ -106,33 +103,65 @@ public class Negociao {
 
     public static void excluirContatoEMailTelefone(Object obj) {
         EntityManager em = TransaFiltro.tlem.get();
-        if (obj instanceof Contato){
-            Contato c=(Contato) obj;
-            c=em.find(Contato.class, c.getId());
-            
-            //Vai faltar! TOMARA
-            em.remove(c);
-            
+        if (obj instanceof Contato) {
+            Contato c = (Contato) obj;
+            c = em.find(Contato.class, c.getId());
+
+            if (c != null) {
+                em.remove(c);
+            }
+
         }
-        if (obj instanceof Email){
-            Email e=(Email)obj;
-            e=em.find(Email.class, e.getId());
-            em.remove(e);
+        if (obj instanceof Email) {
+            Email e = (Email) obj;
+            e = em.find(Email.class, e.getId());
+            if (e != null) {
+                e.getContato().getEmails().remove(e);
+                em.remove(e);
+            }
         }
-        if (obj instanceof Telefone){
-            Telefone t=(Telefone)obj;
-            t=em.find(Telefone.class, t.getId());
-            em.remove(t);
+        if (obj instanceof Telefone) {
+            Telefone t = (Telefone) obj;
+
+            t = em.find(Telefone.class, t.getId());
+            if (t != null) {
+                t.getContato().getTelefones().remove(t);
+                em.remove(t);
+            }
         }
     }
 
-    public static void commitaStarta() {
+    public static Contato recuperaContato(Long id) {
         EntityManager em = TransaFiltro.tlem.get();
-        em.getTransaction().commit();
-        em.getTransaction().begin();
+        return em.find(Contato.class, id);
+    }
+
+    public static void salvaContato(Contato contato) {
+        EntityManager em = TransaFiltro.tlem.get();
+        System.out.println(contato.getTelefones());
+        
+        Contato c=em.find(Contato.class, contato.getId());
+        System.out.println("velho"+c.getTelefones());
+        System.out.println("novo"+contato.getTelefones());
         
         
         
+        em.merge(contato);
+        
+        
+        
+        
+        for (Telefone t : contato.getTelefones()) {
+            if (t.getId() == null) {
+                em.persist(t);
+            }
+        }
+        for (Email e : contato.getEmails()) {
+            if (e.getId() == null) {
+                em.persist(e);
+            }
+        }
+
     }
 
 }

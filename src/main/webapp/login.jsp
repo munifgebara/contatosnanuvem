@@ -22,9 +22,9 @@
         <hr style="height: 15px;background-color: #000"/>
         <form method="post" action="j_security_check">
             Usuário:
-            <input size=15 name="j_username" value="">
+            <input size=15 name="j_username" value="munif@munif.com.br">
             Senha:
-            <input type="password" size=15 name="j_password" value="">
+            <input type="password" size=15 name="j_password" value="446720">
             <input type="submit" value=" Ok ">
         </form>
         <hr style="height: 15px;background-color: #000"/>

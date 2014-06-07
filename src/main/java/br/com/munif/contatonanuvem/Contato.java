@@ -31,10 +31,10 @@ public class Contato implements Serializable {
 
     private String nome;
 
-    @OneToMany(mappedBy = "contato", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "contato", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Email> emails;
 
-    @OneToMany(mappedBy = "contato", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "contato", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Telefone> telefones;
 
     @ManyToOne

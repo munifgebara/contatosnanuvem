@@ -6,20 +6,27 @@
     <h:head>
         <title>Contato na Nuvem Usuario:#{clienteControlador.getUsuario()}</title>
     </h:head>
-    <h:body>
-        <h:form>
-            Olá #{clienteControlador.usuario}
-            
-            <a href="../../controlador?acao=logout">Logout</a><br/>
+    <h:body id="corpo">
+        <h:form id="formulario">
+            <h:panelGrid id="painel" columns="1">
+                Olá #{clienteControlador.usuario}
 
-            <p:tree value="#{clienteControlador.raizContatos}" var="no" orientation="horizontal">
-                <p:treeNode>
-                    <h:outputText value="#{no}" />&nbsp;
-                    <p:commandLink rendered="#{!clienteControlador.eString(no)}" 
-                                   actionListener="#{clienteControlador.excluir(no)}" 
-                                   value="Excluir" update="@form"/>
-                </p:treeNode>
-            </p:tree>
+                <a href="../../controlador?acao=logout">Logout</a><br/>
+
+                <p:tree value="#{clienteControlador.raizContatos}" var="no" orientation="vertical" dynamic="true">
+                    <p:treeNode>
+                        <h:outputText  id="no" value="#{no}" />&nbsp;
+                        <p:commandLink rendered="#{!clienteControlador.eString(no)}" 
+                                       actionListener="#{clienteControlador.excluir(no)}" 
+                                       value="Excluir" update="@form"/>
+                        &nbsp;
+                        <p:commandLink rendered="#{clienteControlador.eContato(no)}" 
+                                       actionListener="#{clienteControlador.editar(no)}" 
+                                       value="Editar" ajax="false" action="editar"/>
+
+                    </p:treeNode>
+                </p:tree>
+            </h:panelGrid>
 
         </h:form>
     </h:body>

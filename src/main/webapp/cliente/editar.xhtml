@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Editando #{clienteControlador.selecionado.nome}</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panelGrid columns="1">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column colspan="6">Editando Contato</p:column>      
+                    </p:row>
+                </f:facet>
+                <p:row >
+                    <p:column><h:outputText value="Nome:"/></p:column>
+                    <p:column colspan="5">
+                        <p:inputText id="nome" size="50"  value="#{clienteControlador.selecionado.nome}" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column colspan="3">
+                        Telefone:
+                        <p:inputText id="novoTelefone" value="#{clienteControlador.telefoneNovo.numero}"/>
+                        <p:commandButton actionListener="#{clienteControlador.salvaTelefoneNovo()}" update="@form" value="Salvar"/>
+                    </p:column>
+                    <p:column colspan="3">
+                        <p:dataTable editMode="cell"  editable="true" var="telefone" value="#{clienteControlador.selecionado.telefones}" 
+                                     selection="#{clienteControlador.telefonesSelecionados}" 
+                                     rowKey="#{telefone.numero}">
+                            <p:column selectionMode="multiple" style="text-align:center"/>
+                            <p:column headerText="Números">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{telefone.numero}" />        
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{telefone.numero}"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton update="@form" icon="ui-icon-search" value="Excluir" actionListener="#{clienteControlador.excluirTelefones()}" />
+                            </f:facet>
+                        </p:dataTable>
+                    </p:column>
+                    <p:column colspan="3">
+                        Email:
+                        <p:inputText id="novoEmail" value="#{clienteControlador.emailNovo.endereco}" />
+                        <p:commandButton  actionListener="#{clienteControlador.salvaEmailNovo()}" update="@form" value="Salvar"/>
+                    </p:column>
+                    <p:messages id="mensagens" />
+                    <p:column colspan="3">
+                        <p:dataTable editMode="cell"  editable="true" var="email" value="#{clienteControlador.selecionado.emails}">
+                            <p:column headerText="Endereços">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{email.endereco}" />        
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{email.endereco}"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                        </p:dataTable>
+                    </p:column>
+
+                </p:row>
+                <f:facet name="footer">
+                    <p:row>
+                        <p:column colspan="6" style="text-align: right">
+                            <p:commandButton actionListener="#{clienteControlador.salvar()}" action="contatos"  ajax="false" value="Salvar"/> 
+                            <p:spacer width="20"/>
+                            <p:commandButton actionListener="#{clienteControlador.cancelar()}" action="contatos"  ajax="false" value="Cancelar" immediate="true"/> 
+                        </p:column>
+                    </p:row>
+                </f:facet>
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+
