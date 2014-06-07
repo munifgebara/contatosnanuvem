@@ -6,6 +6,8 @@
 package br.com.munif.contatonanuvem.negocios;
 
 import br.com.munif.contatonanuvem.Contato;
+import br.com.munif.contatonanuvem.Email;
+import br.com.munif.contatonanuvem.Telefone;
 import br.com.munif.contatonanuvem.Usuario;
 import br.com.munif.web.filtros.TransaFiltro;
 import java.util.List;
@@ -95,6 +97,42 @@ public class Negociao {
     
     public static String emailLogado(){
         return TransaFiltro.tlus.get();
+    }
+
+    public static void excluir(Object obj) {
+        EntityManager em = TransaFiltro.tlem.get();
+        em.remove(obj);
+    }
+
+    public static void excluirContatoEMailTelefone(Object obj) {
+        EntityManager em = TransaFiltro.tlem.get();
+        if (obj instanceof Contato){
+            Contato c=(Contato) obj;
+            c=em.find(Contato.class, c.getId());
+            
+            //Vai faltar! TOMARA
+            em.remove(c);
+            
+        }
+        if (obj instanceof Email){
+            Email e=(Email)obj;
+            e=em.find(Email.class, e.getId());
+            em.remove(e);
+        }
+        if (obj instanceof Telefone){
+            Telefone t=(Telefone)obj;
+            t=em.find(Telefone.class, t.getId());
+            em.remove(t);
+        }
+    }
+
+    public static void commitaStarta() {
+        EntityManager em = TransaFiltro.tlem.get();
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        
+        
+        
     }
 
 }

@@ -7,6 +7,7 @@ package br.com.munif.contatonanuvem;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,10 +31,10 @@ public class Contato implements Serializable {
 
     private String nome;
 
-    @OneToMany(mappedBy = "contato")
+    @OneToMany(mappedBy = "contato", cascade = CascadeType.REMOVE)
     private List<Email> emails;
 
-    @OneToMany(mappedBy = "contato")
+    @OneToMany(mappedBy = "contato", cascade = CascadeType.REMOVE)
     private List<Telefone> telefones;
 
     @ManyToOne
@@ -101,7 +102,7 @@ public class Contato implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.munif.contatonanuvem.Contato[ id=" + id + " ]";
+        return nome;
     }
 
 }

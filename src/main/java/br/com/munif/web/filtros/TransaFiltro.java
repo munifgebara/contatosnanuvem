@@ -77,7 +77,7 @@ public class TransaFiltro implements Filter {
             chain.doFilter(request, response); //Realmente acontece a requisição
             em.getTransaction().commit();
             long tempo = System.currentTimeMillis() - inicio;
-            System.out.println("A requisicao levou " + tempo + "ms");
+            //System.out.println("A requisicao levou " + tempo + "ms");
 
         } catch (Throwable t) {
             if (em.getTransaction().isActive()) {

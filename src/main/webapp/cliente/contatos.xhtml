@@ -14,7 +14,10 @@
 
             <p:tree value="#{clienteControlador.raizContatos}" var="no" orientation="horizontal">
                 <p:treeNode>
-                    <h:outputText value="#{no}" />
+                    <h:outputText value="#{no}" />&nbsp;
+                    <p:commandLink rendered="#{!clienteControlador.eString(no)}" 
+                                   actionListener="#{clienteControlador.excluir(no)}" 
+                                   value="Excluir" update="@form"/>
                 </p:treeNode>
             </p:tree>
 
