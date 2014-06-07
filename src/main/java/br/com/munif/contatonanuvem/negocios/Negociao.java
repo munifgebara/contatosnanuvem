@@ -67,7 +67,8 @@ public class Negociao {
     public static String autoCadastro(String email) {
         Usuario usu = recuperaUsuarioPorEmail(email);
         if (usu != null) {
-            throw new RuntimeException("Email já cadastrado");
+            enviaPinPorEmail(usu);
+            throw new RuntimeException("Email já cadastrado, seu pin foi enviado por email");
         }
         String pin = geraPin();
         //TRABALHO OU TAREFA ENVIAR EMAIL PARA O CARA COM PIN
@@ -77,8 +78,20 @@ public class Negociao {
         u.setNivel("cliente");
         EntityManager em = TransaFiltro.tlem.get();
         em.persist(u);
-
+        enviaPinPorEmail(u);
         return pin;
+    }
+
+    public static void enviaPinPorEmail(final Usuario usu) {
+        new Thread() {
+            public void run() {
+                SendMail.setAssuntoMail("PIN do ContatoNaNuvem");
+                SendMail.setConteudoMail("Olá, bom dia ou boa tarde ou boa noite!\nSeu PIN vale " + usu.getPin() + "\n\n");
+                SendMail.setEmailPara(usu.getEmail());
+                SendMail.enviar();
+            }
+        }.start();
+        
     }
 
     private static String geraPin() {
@@ -139,18 +152,13 @@ public class Negociao {
     public static void salvaContato(Contato contato) {
         EntityManager em = TransaFiltro.tlem.get();
         System.out.println(contato.getTelefones());
-        
-        Contato c=em.find(Contato.class, contato.getId());
-        System.out.println("velho"+c.getTelefones());
-        System.out.println("novo"+contato.getTelefones());
-        
-        
-        
+
+        Contato c = em.find(Contato.class, contato.getId());
+        System.out.println("velho" + c.getTelefones());
+        System.out.println("novo" + contato.getTelefones());
+
         em.merge(contato);
-        
-        
-        
-        
+
         for (Telefone t : contato.getTelefones()) {
             if (t.getId() == null) {
                 em.persist(t);
