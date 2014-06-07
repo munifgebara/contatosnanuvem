@@ -79,13 +79,13 @@ public class Servicos {
 
     @GET
     @Produces("application/json")
-    @Path("/lista")
-    public String lista() {
+    @Path("/lista/{param}")
+    public String lista(@PathParam("param")String pin) {
         System.out.println("Execuntando o método lista ");
         Gson gson = new Gson();
         List<ContatoAndroid> aRetornar=new ArrayList<ContatoAndroid>();
         //converter de Contato para ContatoAndrois
-        List<Contato> listaContatos = Negociao.listaContatos("123");
+        List<Contato> listaContatos = Negociao.listaContatos(pin);
         
         for (Contato c:listaContatos){
             ContatoAndroid ca = converteContato(c);

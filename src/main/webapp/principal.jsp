@@ -30,5 +30,10 @@
         </form>
         <h2><a href="faces/cliente/contatos.xhtml">Acesse a seus contatos</a>  </h2>
         
+        
+        
+        <a href="ContatosNaNuvem.apk">Baixe o Aplicativo</a>
+        
+        
     </body>
 </html>
