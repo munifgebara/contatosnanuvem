@@ -159,7 +159,7 @@ public class Negociao {
 
         em.merge(contato);
 
-        for (Telefone t : contato.getTelefones()) {
+/*        for (Telefone t : contato.getTelefones()) {
             if (t.getId() == null) {
                 em.persist(t);
             }
@@ -168,7 +168,7 @@ public class Negociao {
             if (e.getId() == null) {
                 em.persist(e);
             }
-        }
+        }*/
 
     }
 
